@@ -6,6 +6,7 @@
 
 long duration;
 uint8_t distance;
+String tgl, jam;
 LiquidCrystal_I2C lcd(0x27, 20, 4);
 RTC_DS1307 rtc;
 #define trigPin 15
@@ -34,18 +35,11 @@ void BacaJarak()
 void printDate()
 {
     DateTime now = rtc.now();
-    Serial.print(now.year(), DEC);
-    Serial.print('/');
-    Serial.print(now.month(), DEC);
-    Serial.print('/');
-    Serial.print(now.day(), DEC);
+    tgl = String(now.day()) + "/" + String(now.month()) + "/" + String(now.year());
+    jam = String(now.hour()) + ":" + String(now.minute()) + ":" + String(now.second());
+    Serial.print(tgl);
     Serial.print('\t');
-    Serial.print(now.hour(), DEC);
-    Serial.print(':');
-    Serial.print(now.minute(), DEC);
-    Serial.print(':');
-    Serial.print(now.second(), DEC);
-    Serial.println();
+    Serial.println(jam);
 }
 void LCDDate()
 {
